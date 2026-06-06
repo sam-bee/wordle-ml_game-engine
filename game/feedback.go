@@ -1,7 +1,7 @@
 package game
 
 import (
-	"wordle/words"
+	"github.com/sam-bee/wordle-ml_game-engine/words"
 )
 
 const (
