@@ -1,22 +1,17 @@
 package words
 
 import (
-	_ "embed"
 	"strings"
+
+	wordlists "github.com/sam-bee/wordle-ml_wordlists"
 )
 
-//go:embed data/wordlist-valid-guesses.csv
-var guessesFile string
-
-//go:embed data/wordlist-valid-solutions.csv
-var solutionsFile string
-
 func GetValidGuesses() ([]Word, error) {
-	return makeWordList(guessesFile)
+	return makeWordList(wordlists.ValidGuessesCSV())
 }
 
 func GetValidSolutions() ([]Word, error) {
-	return makeWordList(solutionsFile)
+	return makeWordList(wordlists.ValidSolutionsCSV())
 }
 
 func makeWordList(s string) ([]Word, error) {
