@@ -18,6 +18,13 @@ func TestValidSolutionsReadCorrectly(t *testing.T) {
 	wordListShouldBeAsExpected(t, wl, expectedLength, expectedFirst, err)
 }
 
+func TestActionSpaceReadCorrectly(t *testing.T) {
+	wl, err := GetActionSpace()
+	expectedLength := 4739
+	expectedFirst, _ := NewWord("AARGH")
+	wordListShouldBeAsExpected(t, wl, expectedLength, expectedFirst, err)
+}
+
 func wordListShouldBeAsExpected(t *testing.T, wl []Word, expectedLength int, expectedFirst Word, err error) {
 	gotLength := len(wl)
 	gotFirst := wl[0]

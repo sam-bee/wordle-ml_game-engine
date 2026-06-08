@@ -14,6 +14,10 @@ func GetValidSolutions() ([]Word, error) {
 	return makeWordList(wordlists.ValidSolutionsCSV())
 }
 
+func GetActionSpace() ([]Word, error) {
+	return makeWordList(wordlists.ActionSpaceCSV())
+}
+
 func makeWordList(s string) ([]Word, error) {
 	lines := strings.Split(s, "\n")
 	wl := make([]Word, 0, len(lines))
