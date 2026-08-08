@@ -15,25 +15,32 @@ type Feedback struct {
 }
 
 func GetFeedback(solution words.Word, guess words.Word) Feedback {
-	colours := []int{}
+	colours := make([]int, len(solution))
+	consumed := make([]bool, len(solution))
+
 	for i := range solution {
-		colours = append(colours, getFeedbackColour(solution, guess, i))
-	}
-	return Feedback{colours: colours}
-}
-
-func getFeedbackColour(solution words.Word, guess words.Word, index int) int {
-	if solution[index] == guess[index] {
-		return green
-	}
-
-	for j := 0; j < len(solution); j++ {
-		if solution[j] == guess[index] && j != index {
-			return yellow
+		colours[i] = grey
+		if solution[i] == guess[i] {
+			colours[i] = green
+			consumed[i] = true
 		}
 	}
 
-	return grey
+	for i := range solution {
+		if colours[i] == green {
+			continue
+		}
+
+		for j := range solution {
+			if !consumed[j] && solution[j] == guess[i] {
+				colours[i] = yellow
+				consumed[j] = true
+				break
+			}
+		}
+	}
+
+	return Feedback{colours: colours}
 }
 
 func (f *Feedback) String() string {
